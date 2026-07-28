@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Java / Maven / Gradle
+target/
+.gradle/
+build/
+*.class
+*.jar
+*.war
+
+# Node / React
+node_modules/
+dist/
+.vite/
+*.log
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Database files
+*.db
+*.mv.db
+*.trace.db
