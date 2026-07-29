@@ -1,35 +1,57 @@
 # 🏎️ Car Dealership Inventory System
 
-A full-stack Car Dealership Inventory Management System built using **Java Spring Boot**, **Spring Security with JWT Authentication**, **Spring Data JPA**, **MySQL**, and **React (Vite) + Tailwind CSS**.
+A full-stack Car Dealership Inventory Management System built using **Java Spring Boot**, **Spring Security**, **JWT Authentication**, **Spring Data JPA**, **MySQL**, and **React (Vite)**.
 
-> **Repository:** https://github.com/Pratyush-xxvi/Incubyte_assessment
+The application enables customers to browse and purchase vehicles while allowing administrators to manage inventory and customer orders through a secure role-based system.
+
+**Repository:**  
+https://github.com/Pratyush-xxvi/Incubyte_assessment
 
 ---
 
-# 🌟 Features
+# 🚀 Features
 
-## Backend
+## Authentication
 
-- JWT Authentication (Register/Login)
+- User Registration
+- User Login
+- JWT Authentication
+- BCrypt Password Encryption
 - Role-Based Authorization (Admin & Customer)
-- Vehicle CRUD Operations
-- Vehicle Purchase
-- Vehicle Restock
-- Order Management (Approve/Reject Orders)
-- Vehicle Search & Filtering
-- RESTful APIs
-- Environment Variable Configuration
+
+---
+
+## Vehicle Management
+
+- View Vehicles
+- Search Vehicles
+- Add Vehicle (Admin)
+- Update Vehicle (Admin)
+- Delete Vehicle (Admin)
+- Restock Vehicle (Admin)
+
+---
+
+## Order Management
+
+- Purchase Vehicles
+- Create Purchase Orders
+- View Customer Orders
+- Admin Order Dashboard
+- Approve Orders
+- Reject Orders
+
+---
 
 ## Frontend
 
-- React + Vite Single Page Application
+- React + Vite
 - Responsive User Interface
 - Customer Dashboard
 - Admin Dashboard
 - Purchase Modal
 - Order Management Screen
-- Vehicle Search & Filtering
-- JWT Protected Routes
+- Protected Routes using JWT
 
 ---
 
@@ -37,7 +59,7 @@ A full-stack Car Dealership Inventory Management System built using **Java Sprin
 
 | Layer | Technology |
 |--------|------------|
-| Backend | Java 17, Spring Boot 3 |
+| Backend | Java 17, Spring Boot |
 | Security | Spring Security, JWT |
 | Database | MySQL |
 | ORM | Spring Data JPA (Hibernate) |
@@ -47,28 +69,37 @@ A full-stack Car Dealership Inventory Management System built using **Java Sprin
 
 ---
 
-# 🚀 Project Setup
+# 📂 Project Structure
 
-## Prerequisites
+```
+car-dealership-system/
+│
+├── backend/
+├── frontend/
+├── screenshots/
+├── README.md
+├── PROMPTS.md
+└── .gitignore
+```
+
+---
+
+# ⚙️ Prerequisites
 
 - Java 17+
 - Maven
-- Node.js (v18+)
+- Node.js 18+
 - MySQL Server
 
 ---
 
-## Backend Setup
+# 🚀 Backend Setup
 
-### 1. Clone Repository
+Navigate to the backend folder
 
 ```bash
-git clone https://github.com/Pratyush-xxvi/Incubyte_assessment.git
-
-cd Incubyte_assessment/backend
+cd backend
 ```
-
-### 2. Configure Environment Variables
 
 Copy
 
@@ -82,7 +113,7 @@ to
 .env
 ```
 
-Update the values:
+Configure the following variables
 
 ```env
 DB_URL=jdbc:mysql://localhost:3306/dealership
@@ -91,13 +122,13 @@ DB_PASSWORD=your_password
 JWT_SECRET=your_secret_key
 ```
 
-### 3. Create MySQL Database
+Create a MySQL database
 
 ```sql
 CREATE DATABASE dealership;
 ```
 
-### 4. Run Backend
+Run the backend
 
 ```bash
 mvn clean install
@@ -111,15 +142,27 @@ Backend runs on
 http://localhost:8080
 ```
 
+*(Change this to 8081 if your application uses port 8081.)*
+
 ---
 
-# Frontend Setup
+# 💻 Frontend Setup
+
+Navigate to frontend
 
 ```bash
-cd ../frontend
+cd frontend
+```
 
+Install dependencies
+
+```bash
 npm install
+```
 
+Run
+
+```bash
 npm run dev
 ```
 
@@ -131,20 +174,20 @@ http://localhost:3000
 
 ---
 
-# 🔐 Demo Credentials
+# 🔑 Demo Credentials
 
 ## Admin
 
 ```
-Username : admin
-Password : admin123
+Username: admin
+Password: admin123
 ```
 
 ## Customer
 
 ```
-Username : customer
-Password : customer123
+Username: customer
+Password: customer123
 ```
 
 ---
@@ -153,51 +196,39 @@ Password : customer123
 
 ## Customer Dashboard
 
-![Customer Dashboard](screenshots/customer.png)
+![Customer Dashboard](./screenshots/customer.png)
 
 ---
 
 ## Vehicle List
 
-![Vehicle List](screenshots/vehicless.png)
+![Vehicle List](./screenshots/vehicless.png)
 
 ---
 
 ## Admin Dashboard
 
-![Admin Dashboard](screenshots/admin_dashboard.png)
+![Admin Dashboard](./screenshots/admin_dashboard.png)
 
 ---
 
 ## Admin Orders
 
-![Admin Orders](screenshots/adminn.png)
-
----
-
-# 📂 Project Structure
-
-```
-backend/
-frontend/
-screenshots/
-README.md
-PROMPTS.md
-```
+![Admin Orders](./screenshots/adminn.png)
 
 ---
 
 # 🧪 Testing
 
-The following functionality was tested:
+The following functionality was verified during development:
 
 - User Registration
 - User Login
 - JWT Authentication
 - Vehicle CRUD Operations
 - Vehicle Search
-- Purchase Vehicle
-- Restock Vehicle
+- Vehicle Purchase
+- Vehicle Restock
 - Order Creation
 - Order Approval
 - Order Rejection
@@ -205,30 +236,17 @@ The following functionality was tested:
 
 ---
 
-# 🤖 AI Usage
+# 🤖 My AI Usage
 
-## AI Tools Used
+AI tools were used as development assistants during this project to:
 
-- ChatGPT
-- Google Gemini
+- Discuss implementation approaches
+- Understand Spring Security and JWT concepts
+- Debug backend and frontend issues
+- Review REST API design
+- Improve documentation
 
-## How AI Was Used
-
-AI was used to assist with:
-
-- Spring Boot backend development
-- Spring Security and JWT authentication
-- REST API implementation
-- React frontend development
-- Order management workflow
-- Debugging backend and frontend issues
-- Documentation
-- Environment variable configuration
-- README preparation
-
-## Reflection
-
-AI accelerated development by assisting with backend implementation, frontend development, debugging, documentation, and project organization. All AI-generated suggestions were reviewed, tested, and modified before integration into the final project.
+All AI-generated suggestions were reviewed, modified where required, tested, and integrated before being included in the final project.
 
 ---
 
@@ -246,27 +264,13 @@ Frontend
 frontend/.env.example
 ```
 
-Copy both files to `.env` and update the values before running the project.
-
----
-
-# 📝 Example Commit Format
-
-```bash
-git commit -m "feat: complete car dealership inventory system
-
-Implemented JWT authentication, vehicle inventory management,
-order workflow, frontend integration, documentation,
-screenshots and environment configuration.
-
-Co-authored-by: ChatGPT <AI@users.noreply.github.com>"
-```
+Copy both files to `.env` before running the project.
 
 ---
 
 # 👨‍💻 Author
 
-**Pratyush Jha**
+**Pratyush Prakash Jha**
 
 GitHub Repository:
 
