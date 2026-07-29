@@ -38,24 +38,77 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .cors(Customizer.withDefaults())
-            .csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/vehicles", "/api/vehicles/search", "/api/vehicles/*").hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/vehicles/*/purchase").hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/vehicles/*/restock").hasAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/vehicles").hasAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/vehicles/*").hasAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/vehicles/*").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
-            )
-            .headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                .authorizeHttpRequests(auth -> auth
+
+                        // Public APIs
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+
+                        // =========================
+                        // ORDER APIs
+                        // =========================
+
+                        // Customer/Admin can place order
+                        .requestMatchers(HttpMethod.POST, "/api/orders")
+                        .hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
+
+                        // Customer/Admin can view own orders
+                        .requestMatchers(HttpMethod.GET, "/api/orders/my")
+                        .hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
+
+                        // Only Admin can view all orders
+                        .requestMatchers(HttpMethod.GET, "/api/orders")
+                        .hasAuthority("ROLE_ADMIN")
+
+                        // Only Admin can approve/reject
+                        .requestMatchers(HttpMethod.PUT, "/api/orders/*/approve")
+                        .hasAuthority("ROLE_ADMIN")
+
+                        .requestMatchers(HttpMethod.PUT, "/api/orders/*/reject")
+                        .hasAuthority("ROLE_ADMIN")
+
+                        // =========================
+                        // VEHICLE APIs
+                        // =========================
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/vehicles",
+                                "/api/vehicles/search",
+                                "/api/vehicles/*"
+                        ).hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/api/vehicles/*/purchase")
+                        .hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/api/vehicles/*/restock")
+                        .hasAuthority("ROLE_ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/api/vehicles")
+                        .hasAuthority("ROLE_ADMIN")
+
+                        .requestMatchers(HttpMethod.PUT, "/api/vehicles/*")
+                        .hasAuthority("ROLE_ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/vehicles/*")
+                        .hasAuthority("ROLE_ADMIN")
+
+                        .anyRequest()
+                        .authenticated()
+                )
+
+                .headers(headers ->
+                        headers.frameOptions(frame -> frame.disable()));
+
+        http.addFilterBefore(jwtAuthenticationFilter,
+                UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

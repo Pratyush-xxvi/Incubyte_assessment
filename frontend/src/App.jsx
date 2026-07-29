@@ -10,6 +10,7 @@ import { PurchaseModal } from './components/PurchaseModal';
 import { AdminVehicleModal } from './components/AdminVehicleModal';
 import { AdminRestockModal } from './components/AdminRestockModal';
 import { AuthModal } from './components/AuthModal';
+import AdminOrders from "./components/AdminOrders";
 
 const INITIAL_CATEGORIES = ['All', 'SUV', 'Sedan', 'Luxury', 'Electric', 'Sports', 'Truck'];
 
@@ -244,6 +245,7 @@ export function AppContent() {
             isAdmin={isAdmin}
             isAuthenticated={isAuthenticated}
           />
+          {isAdmin && <AdminOrders />}
         </div>
       </main>
 

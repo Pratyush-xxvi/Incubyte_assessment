@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../services/api';
 import { useToast } from '../context/ToastContext';
+import { placeOrder } from "../services/orderService";
 
 export const PurchaseModal = ({ vehicle, onClose, onSuccess }) => {
   const [quantity, setQuantity] = useState(1);
@@ -11,24 +12,24 @@ export const PurchaseModal = ({ vehicle, onClose, onSuccess }) => {
 
   const totalPrice = parseFloat(vehicle.price) * quantity;
 
-  const handlePurchase = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const handlePurchase = async () => {
     try {
-      const response = await api.post(`/vehicles/${vehicle.id}/purchase`, { quantity });
-      addToast(
-        `🎉 Successfully purchased ${quantity} x ${vehicle.make} ${vehicle.model}!`,
-        'success'
-      );
-      onSuccess(response.data.data);
-      onClose();
+        await placeOrder(vehicle.id);
+
+        alert("Purchase request sent successfully!");
+
+        onClose();
+
+        if (onSuccess) {
+            onSuccess();
+        }
     } catch (err) {
-      const msg = err.response?.data?.message || 'Failed to complete purchase.';
-      addToast(msg, 'error');
-    } finally {
-      setLoading(false);
+        alert(
+            err.response?.data?.message ||
+            "Failed to send purchase request."
+        );
     }
-  };
+};
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">

@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "vehicles")
@@ -45,4 +48,8 @@ public class Vehicle {
 
     @Column(length = 1000)
     private String description;
+
+   @JsonIgnore
+@OneToMany(mappedBy = "vehicle")
+private List<Order> orders;
 }

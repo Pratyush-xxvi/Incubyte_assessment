@@ -27,3 +27,14 @@ Thumbs.db
 *.db
 *.mv.db
 *.trace.db
+
+# Backend
+backend/.env
+
+# Frontend
+frontend/.env
+frontend/.env.local
+
+# Build
+backend/target/
+frontend/node_modules/
