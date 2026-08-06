@@ -5,7 +5,7 @@ A full-stack Car Inventory Management System built using **Java Spring Boot**, *
 **phVault** enables customers to browse, search, and purchase premier Indian automotive vehicles (Mahindra, Tata, Toyota, Hyundai, BMW, Mercedes-Benz, etc.) with prices in Indian Rupees (₹) while enabling administrators to manage inventory and customer purchase orders through a secure role-based system.
 
 **Repository:**  
-https://github.com/Pratyush-xxvi/Incubyte_assessment
+https://github.com/Pratyush-xxvi/phVault
 
 ---
 
@@ -118,4 +118,4 @@ VITE_API_URL=http://localhost:8081/api
 # 👨‍💻 Author
 
 **Pratyush Prakash Jha**  
-GitHub Repository: [https://github.com/Pratyush-xxvi/Incubyte_assessment](https://github.com/Pratyush-xxvi/Incubyte_assessment)
+GitHub Repository: [https://github.com/Pratyush-xxvi/phVault](https://github.com/Pratyush-xxvi/phVault)
