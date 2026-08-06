@@ -31,7 +31,7 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
         <button
           onClick={onClose}
@@ -44,9 +44,9 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
         <div className="flex bg-slate-950 p-1.5 rounded-2xl border border-slate-800 mb-6">
           <button
             onClick={() => setMode('login')}
-            className={`flex-1 py-2 rounded-xl text-xs font-extrabold transition-all ${
+            className={`flex-1 py-2.5 rounded-xl text-xs font-black font-heading transition-all ${
               mode === 'login'
-                ? 'bg-slate-800 text-white shadow-md'
+                ? 'bg-slate-800 text-amber-300 shadow-md border border-slate-700'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -54,9 +54,9 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
           </button>
           <button
             onClick={() => setMode('register')}
-            className={`flex-1 py-2 rounded-xl text-xs font-extrabold transition-all ${
+            className={`flex-1 py-2.5 rounded-xl text-xs font-black font-heading transition-all ${
               mode === 'register'
-                ? 'bg-slate-800 text-white shadow-md'
+                ? 'bg-slate-800 text-amber-300 shadow-md border border-slate-700'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -66,35 +66,35 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
 
         {/* Form Title */}
         <div className="mb-6">
-          <h3 className="text-2xl font-black text-white">
-            {mode === 'login' ? 'Welcome Back' : 'Join Apex Motors'}
+          <h3 className="text-2xl font-black text-white font-heading">
+            {mode === 'login' ? 'Welcome to phVault' : 'Join phVault India'}
           </h3>
           <p className="text-xs text-slate-400">
             {mode === 'login'
-              ? 'Access protected catalog features and vehicle purchasing'
+              ? 'Access protected catalog features and vehicle reservation in ₹ INR'
               : 'Register your customer or dealership admin account'}
           </p>
         </div>
 
         {/* Quick Demo Switcher */}
-        <div className="p-3 bg-slate-950/80 rounded-2xl border border-slate-800/80 mb-6">
-          <span className="block text-[11px] font-semibold text-slate-400 mb-2 uppercase tracking-wider text-center">
+        <div className="p-3.5 bg-slate-950/90 rounded-2xl border border-slate-800 mb-6">
+          <span className="block text-[11px] font-bold text-amber-400/90 mb-2 uppercase tracking-wider text-center font-heading">
             ⚡ Quick Demo Accounts
           </span>
           <div className="flex space-x-2">
             <button
               type="button"
               onClick={() => handleDemoLogin('ADMIN')}
-              className="flex-1 py-2 px-3 rounded-xl bg-amber-950/40 text-amber-300 hover:bg-amber-900/60 border border-amber-500/30 text-xs font-bold transition-all"
+              className="flex-1 py-2 px-3 rounded-xl bg-amber-950/50 text-amber-300 hover:bg-amber-900/70 border border-amber-500/40 text-xs font-bold transition-all"
             >
-              👑 Login as Admin
+              👑 Demo Admin
             </button>
             <button
               type="button"
               onClick={() => handleDemoLogin('CUSTOMER')}
-              className="flex-1 py-2 px-3 rounded-xl bg-cyan-950/40 text-cyan-300 hover:bg-cyan-900/60 border border-cyan-500/30 text-xs font-bold transition-all"
+              className="flex-1 py-2 px-3 rounded-xl bg-cyan-950/50 text-cyan-300 hover:bg-cyan-900/70 border border-cyan-500/40 text-xs font-bold transition-all"
             >
-              👤 Login as Customer
+              👤 Demo Customer
             </button>
           </div>
         </div>
@@ -106,10 +106,10 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
             <input
               type="text"
               required
-              placeholder="e.g. alex_driver"
+              placeholder="e.g. admin or customer"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
@@ -119,10 +119,10 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
               <input
                 type="email"
                 required
-                placeholder="alex@example.com"
+                placeholder="driver@phvault.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
               />
             </div>
           )}
@@ -135,7 +135,7 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
@@ -145,10 +145,10 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
               >
-                <option value="ROLE_CUSTOMER">Customer (Purchase & Browse)</option>
-                <option value="ROLE_ADMIN">Admin (Inventory Management & Restock)</option>
+                <option value="ROLE_CUSTOMER">Customer (Browse &amp; Purchase Vehicles in ₹)</option>
+                <option value="ROLE_ADMIN">Admin (Inventory Management &amp; Restock)</option>
               </select>
             </div>
           )}
@@ -156,9 +156,9 @@ export const AuthModal = ({ initialMode = 'login', onClose }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 mt-2 gradient-bg text-white hover:brightness-110 rounded-xl text-xs font-extrabold shadow-lg shadow-cyan-500/20 transition-all"
+            className="w-full py-3 mt-2 gradient-bg text-slate-950 hover:brightness-110 rounded-xl text-xs font-black shadow-lg shadow-amber-500/20 transition-all font-heading"
           >
-            {loading ? 'Processing...' : mode === 'login' ? 'Log In to System' : 'Create Account'}
+            {loading ? 'Processing...' : mode === 'login' ? 'Log In to phVault' : 'Create Account'}
           </button>
         </form>
       </div>

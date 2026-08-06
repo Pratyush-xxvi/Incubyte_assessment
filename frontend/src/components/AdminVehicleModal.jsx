@@ -49,10 +49,10 @@ export const AdminVehicleModal = ({ vehicle, onClose, onSuccess }) => {
       let response;
       if (isEditing) {
         response = await api.put(`/vehicles/${vehicle.id}`, formData);
-        addToast(`Updated ${formData.make} ${formData.model} successfully!`, 'success');
+        addToast(`Updated ${formData.make} ${formData.model} in phVault catalog!`, 'success');
       } else {
         response = await api.post('/vehicles', formData);
-        addToast(`Added ${formData.make} ${formData.model} to inventory!`, 'success');
+        addToast(`Added ${formData.make} ${formData.model} to phVault catalog!`, 'success');
       }
       onSuccess(response.data.data);
       onClose();
@@ -65,7 +65,7 @@ export const AdminVehicleModal = ({ vehicle, onClose, onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md overflow-y-auto">
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative my-8">
         <button
           onClick={onClose}
@@ -74,38 +74,38 @@ export const AdminVehicleModal = ({ vehicle, onClose, onSuccess }) => {
           ✕
         </button>
 
-        <h3 className="text-2xl font-black text-white mb-2">
-          {isEditing ? '✏️ Edit Vehicle Specs' : '🚗 Add New Vehicle'}
+        <h3 className="text-2xl font-black text-white font-heading mb-2">
+          {isEditing ? '✏️ Edit Vehicle Specs' : '🚗 Add New Vehicle to phVault'}
         </h3>
         <p className="text-xs text-slate-400 mb-6">
-          {isEditing ? 'Update specs, price, or inventory count.' : 'Fill in vehicle information to expand the dealership catalog.'}
+          {isEditing ? 'Update specifications, INR price, or inventory count.' : 'Fill in vehicle information to expand the Indian automotive catalog.'}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1">Make *</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1">Make / Brand *</label>
               <input
                 type="text"
                 name="make"
                 required
-                placeholder="e.g. Porsche"
+                placeholder="e.g. Mahindra / Tata / BMW"
                 value={formData.make}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1">Model *</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1">Model Name *</label>
               <input
                 type="text"
                 name="model"
                 required
-                placeholder="e.g. Taycan Turbo S"
+                placeholder="e.g. Thar Roxx 4x4"
                 value={formData.model}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
               />
             </div>
           </div>
@@ -117,34 +117,35 @@ export const AdminVehicleModal = ({ vehicle, onClose, onSuccess }) => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
               >
                 <option value="SUV">SUV</option>
-                <option value="Sedan">Sedan</option>
-                <option value="Luxury">Luxury</option>
                 <option value="Electric">Electric</option>
+                <option value="Luxury">Luxury</option>
+                <option value="Sedan">Sedan</option>
                 <option value="Sports">Sports</option>
+                <option value="Hatchback">Hatchback</option>
                 <option value="Truck">Truck</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1">Price ($) *</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1">Price (₹ INR) *</label>
               <input
                 type="number"
-                step="0.01"
+                step="1"
                 min="0"
                 name="price"
                 required
-                placeholder="89000.00"
+                placeholder="1699000"
                 value={formData.price}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 font-mono-code"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1">Quantity *</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1">Stock Quantity *</label>
               <input
                 type="number"
                 min="0"
@@ -152,33 +153,33 @@ export const AdminVehicleModal = ({ vehicle, onClose, onSuccess }) => {
                 required
                 value={formData.quantity}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 font-mono-code"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1">Year</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1">Model Year</label>
               <input
                 type="number"
                 name="year"
                 placeholder="2024"
                 value={formData.year}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1">VIN Number</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1">VIN Code</label>
               <input
                 type="text"
                 name="vin"
-                placeholder="WP0AF2A9..."
+                placeholder="MA1THARROXX..."
                 value={formData.vin}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 font-mono-code"
               />
             </div>
           </div>
@@ -191,19 +192,19 @@ export const AdminVehicleModal = ({ vehicle, onClose, onSuccess }) => {
               placeholder="https://images.unsplash.com/..."
               value={formData.imageUrl}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-400 mb-1">Description</label>
+            <label className="block text-xs font-semibold text-slate-400 mb-1">Vehicle Description &amp; Specs</label>
             <textarea
               name="description"
               rows="3"
-              placeholder="Describe performance details, specs, and features..."
+              placeholder="2.0L Turbo Petrol / 2.2L mHawk Diesel, 174 bhp, 4WD system..."
               value={formData.description}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500"
+              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
             ></textarea>
           </div>
 
@@ -218,9 +219,9 @@ export const AdminVehicleModal = ({ vehicle, onClose, onSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 py-3 gradient-bg text-white hover:brightness-110 rounded-xl text-xs font-extrabold shadow-lg shadow-cyan-500/20 transition-all"
+              className="flex-1 py-3 gradient-bg text-slate-950 hover:brightness-110 rounded-xl text-xs font-black shadow-lg shadow-amber-500/20 transition-all font-heading"
             >
-              {loading ? 'Saving...' : isEditing ? 'Update Vehicle' : 'Save New Vehicle'}
+              {loading ? 'Saving...' : isEditing ? 'Update Vehicle' : 'Save Vehicle to phVault'}
             </button>
           </div>
         </form>
