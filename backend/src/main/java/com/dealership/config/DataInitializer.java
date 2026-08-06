@@ -53,7 +53,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(5)
                     .year(2024)
                     .vin("MA1THARROXX2024IN")
-                    .imageUrl("https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/40087/thar-exterior-right-front-three-quarter-35.jpeg?q=80&wm=1")
                     .description("2.0L Turbo Petrol / 2.2L mHawk Diesel, 174 bhp, 4WD system, Dual Sunroof & ADAS.")
                     .build(),
                 Vehicle.builder()
@@ -64,7 +64,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(8)
                     .year(2024)
                     .vin("TATANEXONEV2024IN")
-                    .imageUrl("https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/141867/nexon-ev-exterior-right-front-three-quarter-3.jpeg?q=80&wm=1")
                     .description("45 kWh Battery, 465 km ARAI certified range, V2L & V2V charging technology.")
                     .build(),
                 Vehicle.builder()
@@ -75,7 +75,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(4)
                     .year(2024)
                     .vin("MA1XUV700AX7L2024")
-                    .imageUrl("https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/42358/xuv700-exterior-right-front-three-quarter-3.jpeg?q=80&wm=1")
                     .description("2.2L mHawk Diesel AWD, 200 PS power, Panoramic Skyroof & ADAS Level 2.")
                     .build(),
                 Vehicle.builder()
@@ -86,7 +86,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(3)
                     .year(2024)
                     .vin("TOYFORTLEGEND2024")
-                    .imageUrl("https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/44709/fortuner-legender-exterior-right-front-three-quarter-19.jpeg?q=80&wm=1")
                     .description("2.8L Diesel 4x4, 204 PS, 500 Nm torque, premium dual-tone interior.")
                     .build(),
                 Vehicle.builder()
@@ -97,7 +97,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(6)
                     .year(2024)
                     .vin("HYUCRETANLINE2024")
-                    .imageUrl("https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/169111/creta-n-line-exterior-right-front-three-quarter-3.jpeg?q=80&wm=1")
                     .description("1.5L Turbo GDi, 160 PS power, 7-Speed DCT with paddle shifters & N Line tuning.")
                     .build(),
                 Vehicle.builder()
@@ -108,7 +108,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(0) // Out of stock example
                     .year(2024)
                     .vin("MSJIMNYALPHA2024IN")
-                    .imageUrl("https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/134449/jimny-exterior-right-front-three-quarter-3.jpeg?q=80&wm=1")
                     .description("ALLGRIP PRO 4WD system, rigid ladder frame, 1.5L K-series petrol engine.")
                     .build(),
                 Vehicle.builder()
@@ -119,7 +119,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(2)
                     .year(2024)
                     .vin("BMWM340IXDRIVE2024")
-                    .imageUrl("https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/136211/m340i-exterior-right-front-three-quarter-3.jpeg?q=80&wm=1")
                     .description("3.0L Straight-6 TwinPower Turbo, 374 bhp, 0-100 km/h in 4.4 seconds.")
                     .build(),
                 Vehicle.builder()
@@ -130,7 +130,7 @@ public class DataInitializer implements CommandLineRunner {
                     .quantity(1)
                     .year(2024)
                     .vin("MBG63AMGINDIA2024")
-                    .imageUrl("https://images.unsplash.com/photo-1520050206274-a1ae44613e6d?auto=format&fit=crop&w=800&q=80")
+                    .imageUrl("https://imgd.aeplcdn.com/1056x594/n/cw/ec/130583/g-class-exterior-right-front-three-quarter-3.jpeg?q=80&wm=1")
                     .description("Handcrafted AMG 4.0L V8 Biturbo, 585 hp, AMG Performance 4MATIC.")
                     .build()
             );
