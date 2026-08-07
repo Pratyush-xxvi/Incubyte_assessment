@@ -132,6 +132,39 @@ export function AppContent() {
   const [adminModal, setAdminModal] = useState({ open: false, vehicle: null });
   const [restockModal, setRestockModal] = useState({ open: false, vehicle: null });
 
+  // Helper to ensure Indian car images and catalog consistency
+  const normalizeVehicleList = (list) => {
+    const valid = list.filter((v) => {
+      const m = (v.make || '').toLowerCase();
+      return !['tesla', 'porsche', 'ford'].includes(m);
+    });
+
+    if (valid.length === 0) return SAMPLE_VEHICLES;
+
+    return valid.map((v) => {
+      let img = v.imageUrl;
+      const make = (v.make || '').toLowerCase();
+      const model = (v.model || '').toLowerCase();
+
+      if (!img || img.includes('unsplash') || img.includes('aeplcdn') || img.includes('http')) {
+        if (make.includes('mahindra') && model.includes('thar')) img = '/images/mahindra_thar.jpg';
+        else if (make.includes('tata') || model.includes('nexon')) img = '/images/tata_nexon_ev.jpg';
+        else if (make.includes('mahindra') || model.includes('xuv')) img = '/images/mahindra_xuv700.jpg';
+        else if (make.includes('toyota') || model.includes('fortuner')) img = '/images/toyota_fortuner.jpg';
+        else if (make.includes('hyundai') || model.includes('creta')) img = '/images/hyundai_creta.jpg';
+        else if (make.includes('jimny') || model.includes('jimny') || make.includes('maruti')) img = '/images/maruti_jimny.jpg';
+        else if (make.includes('bmw') || model.includes('340')) img = '/images/bmw_m340i.jpg';
+        else if (make.includes('mercedes') || model.includes('g 63') || model.includes('g-class')) img = '/images/mercedes_g63.jpg';
+        else img = '/images/mahindra_thar.jpg';
+      }
+
+      return {
+        ...v,
+        imageUrl: img,
+      };
+    });
+  };
+
   // Fetch Vehicles from Backend API with sorting and fallback
   const fetchVehicles = useCallback(async () => {
     setLoading(true);
@@ -148,10 +181,8 @@ export function AppContent() {
 
       const res = await api.get(url);
       let fetched = res.data.data || [];
-      if (fetched.length === 0 && !searchQuery && selectedCategory === 'All') {
-        fetched = SAMPLE_VEHICLES;
-      }
-      setVehicles(applySorting(fetched, sortBy));
+      const normalized = normalizeVehicleList(fetched);
+      setVehicles(applySorting(normalized, sortBy));
     } catch (err) {
       console.warn('Backend API connection failed, loading phVault Indian car stock.', err);
       // Fallback local filtering for standalone presentation

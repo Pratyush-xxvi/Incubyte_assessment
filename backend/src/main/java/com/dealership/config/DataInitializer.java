@@ -42,8 +42,14 @@ public class DataInitializer implements CommandLineRunner {
                     .build());
         }
 
-        // 2. Seed Initial Vehicles if empty
-        if (vehicleRepository.count() == 0) {
+        // 2. Seed Initial Vehicles if empty or containing old initial data
+        boolean hasOldData = vehicleRepository.findAll().stream()
+                .anyMatch(v -> "Tesla".equalsIgnoreCase(v.getMake()) || "Porsche".equalsIgnoreCase(v.getMake()) || "Ford".equalsIgnoreCase(v.getMake()));
+
+        if (vehicleRepository.count() == 0 || hasOldData) {
+            if (hasOldData) {
+                vehicleRepository.deleteAll();
+            }
             List<Vehicle> sampleVehicles = List.of(
                 Vehicle.builder()
                     .make("Mahindra")
