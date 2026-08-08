@@ -25,4 +25,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
                                 @Param("maxPrice") BigDecimal maxPrice);
 
     List<Vehicle> findByCategoryIgnoreCase(String category);
+
+    boolean existsByVin(String vin);
 }
