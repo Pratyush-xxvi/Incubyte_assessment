@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -21,9 +22,22 @@ public class DataInitializer implements CommandLineRunner {
     private final VehicleRepository vehicleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // Makes that do NOT belong in this Indian dealership catalog
+    private static final Set<String> INVALID_MAKES = Set.of(
+        "tesla", "porsche", "ford", "audi", "chevrolet", "dodge", "jeep", "land rover"
+    );
+
+    // The exact VINs we manage — any other VIN gets removed on startup
+    private static final Set<String> MANAGED_VINS = Set.of(
+        "MA1THARROXX2024IN", "TATANEXONEV2024IN", "MA1XUV700AX7L2024",
+        "TOYFORTLEGEND2024", "HYUCRETANLINE2024", "MSJIMNYALPHA2024IN",
+        "BMWM340IXDRIVE2024", "MBG63AMGINDIA2024", "KIASELTOSHTX2024IN",
+        "TATASAFARIDK2024IN", "HONDACITYEHEV2024IN", "SKODAOCTRSIN2024IN"
+    );
+
     @Override
     public void run(String... args) throws Exception {
-        // 1. Seed default admin user if not present
+        // 1. Seed admin user if not present
         if (!userRepository.existsByUsername("admin")) {
             userRepository.save(User.builder()
                     .username("admin")
@@ -33,8 +47,19 @@ public class DataInitializer implements CommandLineRunner {
                     .build());
         }
 
-        // 2. Seed vehicles by VIN — only inserts if that VIN does not already exist.
-        //    This is safe to run on every startup: it will never duplicate or wipe existing data.
+        // 2. Remove any vehicles not in our managed catalog (wrong/old/manually-added records)
+        vehicleRepository.findAll().forEach(v -> {
+            String make = (v.getMake() == null ? "" : v.getMake()).toLowerCase();
+            String vin  = (v.getVin()  == null ? "" : v.getVin());
+            boolean badMake = INVALID_MAKES.contains(make);
+            boolean unknownVin = !MANAGED_VINS.contains(vin);
+            if (badMake || unknownVin) {
+                vehicleRepository.delete(v);
+            }
+        });
+
+        // 3. Seed catalog vehicles by VIN — inserts only if VIN doesn't exist yet
+        //    Exactly 8 vehicles mapped to the 8 available image files
         List<Vehicle> catalog = List.of(
             Vehicle.builder()
                 .make("Mahindra").model("Thar Roxx 4x4").category("SUV")
